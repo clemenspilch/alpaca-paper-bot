@@ -1,0 +1,29 @@
+name: Alpaca Paper Bot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * 1-5"
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code herunterladen
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Bibliotheken installieren
+        run: pip install -r requirements.txt
+
+      - name: Bot starten
+        env:
+          APCA_API_KEY_ID: ${{ secrets.APCA_API_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.APCA_API_SECRET_KEY }}
+          ENABLE_PAPER_ORDERS: "false"
+        run: python bot.py
