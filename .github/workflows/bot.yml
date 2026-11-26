@@ -3,7 +3,7 @@ name: Alpaca Paper Bot
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/15 * * * 1-5"
+    - cron: "*30 22 * * 1-5"
 
 jobs:
   run-bot:
